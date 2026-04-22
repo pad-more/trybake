@@ -240,26 +240,17 @@ nav{position:sticky;top:0;z-index:200;background:rgba(12,10,8,0.97);backdrop-fil
 .send-order-feedback.err{color:#e07070}
 
 /* ── ABOUT PAGE ── */
-.about-hero{min-height:70vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
-.about-hero-img{position:relative;overflow:hidden;min-height:500px}
-.about-hero-img img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.about-hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(12,10,8,0.15),transparent)}
-.about-hero-text{background:var(--bg-secondary);padding:80px 64px;display:flex;flex-direction:column;justify-content:center}
-.about-owner-tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
-.about-owner-name{font-family:var(--ff-serif);font-size:clamp(36px,4vw,56px);font-weight:300;color:var(--cream);line-height:1.05;margin-bottom:24px}
-.about-owner-name em{font-style:italic;color:var(--gold)}
-.about-quote{font-family:var(--ff-serif);font-size:19px;font-style:italic;color:rgba(245,239,230,0.7);line-height:1.7;border-left:2px solid var(--gold);padding-left:24px;margin:28px 0}
-.about-body-text{font-size:14px;color:var(--muted);font-weight:300;line-height:1.9}
+.about-hero{position:relative;height:60vh;min-height:420px;overflow:hidden;display:flex;align-items:flex-end}
+.about-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 40%;filter:brightness(0.3)}
+.about-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,var(--bg-primary) 0%,rgba(12,10,8,0.4) 50%,transparent 100%)}
+[data-theme="light"] .about-hero-overlay{background:linear-gradient(to top,var(--bg-primary) 0%,rgba(250,246,240,0.5) 50%,transparent 100%)}
+[data-theme="light"] .about-hero-bg{filter:brightness(0.5)}
+.about-hero-content{position:relative;z-index:2;padding:0 5% 72px;max-width:720px}
 .about-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
 .pillar{background:var(--bg-secondary);padding:48px 36px}
 .pillar-icon{font-size:28px;margin-bottom:20px}
 .pillar-title{font-family:var(--ff-serif);font-size:22px;font-weight:400;color:var(--cream);margin-bottom:12px}
 .pillar-text{font-size:13px;color:var(--muted);font-weight:300;line-height:1.8}
-.about-story{padding:100px 5%;max-width:1100px;margin:0 auto}
-.about-story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-.about-story-img{height:520px;overflow:hidden;position:relative}
-.about-story-img img{width:100%;height:100%;object-fit:cover}
-.about-story-img-caption{position:absolute;bottom:0;left:0;right:0;padding:20px 24px;background:linear-gradient(to top,rgba(12,10,8,0.85),transparent);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,239,230,0.6)}
 .about-milestones{padding:80px 5%;background:var(--bg-secondary)}
 .milestones-inner{max-width:1100px;margin:0 auto}
 .milestones-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:56px}
@@ -272,6 +263,15 @@ nav{position:sticky;top:0;z-index:200;background:rgba(12,10,8,0.97);backdrop-fil
 .about-cta-strip{background:var(--gold);padding:64px 5%;display:flex;align-items:center;justify-content:space-between;gap:40px}
 .about-cta-text{font-family:var(--ff-serif);font-size:clamp(24px,3vw,40px);font-weight:300;color:var(--ink)}
 .about-cta-text em{font-style:italic}
+
+/* ── TESTIMONIALS ── */
+.testimonials-section{padding:100px 5%;background:var(--bg-primary)}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:56px}
+.testimonial-card{background:var(--bg-secondary);padding:40px 32px;display:flex;flex-direction:column}
+.testimonial-stars{color:var(--gold);font-size:14px;letter-spacing:4px;margin-bottom:20px}
+.testimonial-text{font-family:var(--ff-serif);font-size:17px;font-style:italic;color:rgba(245,239,230,0.75);line-height:1.7;flex:1;margin-bottom:24px}
+.testimonial-author{font-size:12px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--cream)}
+.testimonial-detail{font-size:11px;color:var(--muted);margin-top:4px;font-weight:300}
 
 /* ── FOOTER ── */
 footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding:72px 5% 40px}
@@ -298,7 +298,9 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
 /* ── MOBILE NAV ── */
 .mobile-menu-btn{display:none;background:none;border:none;color:var(--cream);font-size:22px;cursor:pointer}
 @media(max-width:900px){
-  .nav-links{display:none}
+  .nav-links{display:none !important}
+  .nav-links.open{display:flex !important;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:rgba(12,10,8,0.98);backdrop-filter:blur(12px);padding:20px 5%;gap:0;border-bottom:1px solid rgba(184,148,74,0.2);z-index:199}
+  .nav-links.open a{padding:14px 0;border-bottom:1px solid rgba(184,148,74,0.1);font-size:13px}
   .mobile-menu-btn{display:block}
   .hero-title{font-size:52px}
   .hero-stats{display:none}
@@ -310,13 +312,11 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
   .gallery-grid{grid-template-columns:1fr 1fr;grid-auto-rows:200px}
   .gallery-item:first-child{grid-column:span 2}
   .products-grid{grid-template-columns:1fr 1fr}
-  .about-hero{grid-template-columns:1fr}
-  .about-hero-img{min-height:340px}
-  .about-hero-text{padding:48px 32px}
-  .about-story-grid{grid-template-columns:1fr}
+  .about-hero{height:50vh;min-height:360px}
   .about-pillars{grid-template-columns:1fr}
   .milestones-grid{grid-template-columns:1fr 1fr}
   .about-cta-strip{flex-direction:column;text-align:center}
+  .testimonials-grid{grid-template-columns:1fr}
 }
 @media(max-width:600px){
   .products-grid{grid-template-columns:1fr}
@@ -356,7 +356,6 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
 [data-theme="light"] .modal-overlay{background:rgba(58,46,37,0.6)}
 [data-theme="light"] .gallery-caption{background:linear-gradient(to top,rgba(250,246,240,0.85),transparent)}
 [data-theme="light"] select.form-input option{background:var(--bg-primary);color:var(--cream)}
-[data-theme="light"] .about-hero-img::after{background:linear-gradient(to right,rgba(242,234,224,0.2),transparent)}
 .conf-page{min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 5%}
 </style>
 <!-- EmailJS -->
@@ -366,12 +365,12 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
 <body>
 
 <!-- ANNOUNCEMENT -->
-<div class="announce">Free delivery on orders over GH₵200 in Accra &nbsp;·&nbsp; <a href="javascript:void(0)" onclick="showPage('shop')">Shop now</a></div>
+<div class="announce">Free delivery on orders over GH₵500 in Accra &nbsp;·&nbsp; <a href="javascript:void(0)" onclick="showPage('shop')">Shop now</a></div>
 
 <!-- NAV -->
 <nav id="main-nav">
   <a href="javascript:void(0)" class="nav-brand" onclick="showPage('home')" style="display:flex;align-items:center;gap:10px">
-    <img src="logo.jpg" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0" alt="BakeMyDay.gh logo">
+    <img src="/static/logo.jpg" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0" alt="BakeMyDay.gh logo">
     <span style="color:var(--cream)">BakeMyDay<span style="color:var(--gold)">.gh</span></span>
   </a>
   <ul class="nav-links">
@@ -405,7 +404,7 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-bg" style="background-image: url('photo_2026-04-11_23-22-37.jpg')"></div>
+    <div class="hero-bg" style="background-image: url('/static/photo_2026-04-11_23-22-37.jpg')"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <span class="hero-tag">BakeMyDay.gh &mdash; Accra's finest banana bread</span>
@@ -437,7 +436,7 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
   <!-- EDITORIAL STRIP -->
   <div class="editorial">
     <div class="editorial-img">
-      <img src="photo_2026-04-11_23-22-42.jpg" alt="Fresh banana breads cooling" style="width:100%;height:100%;object-fit:cover">
+      <img src="/static/photo_2026-04-11_23-22-42.jpg" alt="Fresh banana breads cooling" style="width:100%;height:100%;object-fit:cover">
     </div>
     <div class="editorial-text">
       <span class="sec-eyebrow">Our Promise</span>
@@ -462,7 +461,7 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
     </div>
     <div class="packages-grid">
       <div class="package-card" onclick="showPage('packages')">
-        <div class="package-img"><img src="mini smile.jpg" alt="Smile Box"></div>
+        <div class="package-img"><img src="/static/mini smile.jpg" alt="Smile Box"></div>
         <span class="sec-eyebrow" style="margin-bottom:10px">Most Popular</span>
         <div class="package-name">The Mini Smile Box</div>
         <div class="package-desc">Four handpicked mini loaves, paired with a glass drink, a chocolate drink, and a personalised card. Our most gifted package.</div>
@@ -472,21 +471,21 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
           <div class="package-item">1 Chocolate Drink</div>
           <div class="package-item">Personalised Card</div>
         </div>
-        <div class="package-price">GH₵195</div>
+        <div class="package-price">GH₵160</div>
       </div>
       <div class="package-card featured" onclick="showPage('packages')">
         <div class="featured-badge">Premium</div>
-        <div class="package-img"><img src="Smile Box.jpg" alt="Smile Box Deluxe"></div>
+        <div class="package-img"><img src="/static/Smile Box.jpg" alt="Smile Box Deluxe"></div>
         <span class="sec-eyebrow" style="margin-bottom:10px">Signature</span>
         <div class="package-name">The Smile Box</div>
         <div class="package-desc">The full experience. Six to eight loaves, box juice, and two premium chocolate bars — beautifully presented and ready to gift.</div>
         <div class="package-includes">
-          <div class="package-item">6–8 Mini Loaves — curated selection</div>
+          <div class="package-item">4 Midi Loaves or 8 Mini Loaves — curated selection</div>
           <div class="package-item">Box Juice</div>
-          <div class="package-item">2 Premium Chocolate Bars</div>
+          <div class="package-item">2 Chocolate Bars</div>
           <div class="package-item">Luxury Packaging</div>
         </div>
-        <div class="package-price">GH₵295</div>
+        <div class="package-price">GH₵280</div>
       </div>
     </div>
   </section>
@@ -503,23 +502,23 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
   </section>
   <div class="gallery-grid" style="margin-bottom:100px">
     <div class="gallery-item" onclick="showPage('gallery')">
-      <img src="photo_2026-04-11_23-22-46.jpg" alt="Bake My Day products">
+      <img src="/static/photo_2026-04-11_23-22-46.jpg" alt="Bake My Day products">
       <div class="gallery-caption">The full spread</div>
     </div>
     <div class="gallery-item" onclick="showPage('gallery')">
-      <img src="photo_2026-04-11_23-22-50.jpg" alt="Box of loaves">
+      <img src="/static/photo_2026-04-11_23-22-50.jpg" alt="Box of loaves">
       <div class="gallery-caption">Ready to deliver</div>
     </div>
     <div class="gallery-item" onclick="showPage('gallery')">
-      <img src="Smile Box.jpg" alt="Double chocolate loaves">
+      <img src="/static/Smile Box.jpg" alt="Double chocolate loaves">
       <div class="gallery-caption">Double chocolate</div>
     </div>
     <div class="gallery-item" onclick="showPage('gallery')">
-      <img src="mini smile.jpg" alt="Loaves close up">
+      <img src="/static/mini smile.jpg" alt="Loaves close up">
       <div class="gallery-caption">Straight from the oven</div>
     </div>
     <div class="gallery-item" onclick="showPage('gallery')">
-      <img src="photo_2026-04-11_23-22-35.jpg" alt="Smile box">
+      <img src="/static/photo_2026-04-11_23-22-35.jpg" alt="Smile box">
       <div class="gallery-caption">Smile Box</div>
     </div>
   </div>
@@ -529,7 +528,7 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
 <!-- ═══════════════════════════════════════════════════ SHOP PAGE -->
 <div id="page-shop" class="page">
   <div class="shop-hero">
-    <div class="shop-hero-bg" style="background-image: url('photo_2026-04-11_23-22-37.jpg')"></div>
+    <div class="shop-hero-bg" style="background-image: url('/static/photo_2026-04-11_23-22-37.jpg')"></div>
     <div class="shop-hero-overlay"></div>
     <div class="shop-hero-content">
       <span class="sec-eyebrow">Full Menu</span>
@@ -577,10 +576,10 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
           <div style="padding:20px 0;border-bottom:1px solid var(--border)"><div style="font-family:var(--ff-serif);font-size:18px;color:var(--cream);margin-bottom:4px">Corporate Gifting</div><div style="font-size:13px;color:var(--muted);font-weight:300">Bulk orders with branded packaging for your team or clients</div></div>
           <div style="padding:20px 0;border-bottom:1px solid var(--border)"><div style="font-family:var(--ff-serif);font-size:18px;color:var(--cream);margin-bottom:4px">Weddings & Events</div><div style="font-size:13px;color:var(--muted);font-weight:300">Customised favours and centrepiece boxes for any occasion</div></div>
           <div style="padding:20px 0;border-bottom:1px solid var(--border)"><div style="font-family:var(--ff-serif);font-size:18px;color:var(--cream);margin-bottom:4px">Birthdays & Milestones</div><div style="font-size:13px;color:var(--muted);font-weight:300">Personalised selections with cards and curated flavour packs</div></div>
-          <div style="padding:20px 0;border-bottom:1px solid var(--border)"><div style="font-family:var(--ff-serif);font-size:18px;color:var(--cream);margin-bottom:4px">International Delivery</div><div style="font-size:13px;color:var(--muted);font-weight:300">We ship to diaspora communities worldwide — contact us for rates</div></div>
+          <div style="padding:20px 0;border-bottom:1px solid var(--border)"><div style="font-family:var(--ff-serif);font-size:18px;color:var(--cream);margin-bottom:4px">Nationwide Delivery</div><div style="font-size:13px;color:var(--muted);font-weight:300">We deliver across the country — Ghana's taste, right to your doorstep.</div></div>
         </div>
         <div style="margin-top:40px">
-          <img src="photo_2026-04-11_23-22-46.jpg" alt="Custom packages" style="width:100%;height:280px;object-fit:cover">
+          <img src="/static/photo_2026-04-11_23-22-46.jpg" alt="Custom packages" style="width:100%;height:280px;object-fit:cover">
         </div>
       </div>
       <div class="custom-form-wrap">
@@ -611,39 +610,20 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
   </section>
 </div>
 
-<!-- ═══════════════ ABOUT PAGE -->
+<!-- ═══════════════ ABOUT PAGE (REWORKED — BRAND-FOCUSED) ══════════════════ -->
 <div id="page-about" class="page">
 
-  <!-- OWNER HERO -->
+  <!-- BRAND HERO — full-width product image -->
   <div class="about-hero">
-    <div class="about-hero-img">
-      <img src="yvonne.jpg" alt="Founder of BakeMyDay.gh">
-    </div>
-    <div class="about-hero-text">
-      <span class="about-owner-tag">The Founder</span>
-      <h1 class="about-owner-name">Born from a<br>kitchen, built<br>on <em>passion.</em></h1>
-      <blockquote class="about-quote">"I never set out to start a business. I just wanted to bake something that would make people feel the way homemade food made me feel — held, loved, and at home."</blockquote>
-      <p class="about-body-text">BakeMyDay.gh was founded by a passionate baker whose love for banana bread turned from a weekend ritual into something far bigger — a brand that now reaches families, offices, and loved ones across Accra and beyond.</p>
+    <div class="about-hero-bg" style="background-image:url('/static/photo_2026-04-11_23-22-42.jpg')"></div>
+    <div class="about-hero-overlay"></div>
+    <div class="about-hero-content">
+      <span class="sec-eyebrow">About BakeMyDay.gh</span>
+      <h1 class="sec-title" style="font-size:clamp(40px,5vw,68px);margin-bottom:20px">Accra's favourite<br><em>banana bread.</em></h1>
+      <div class="divider" style="margin:20px 0"></div>
+      <p style="font-size:15px;color:rgba(245,239,230,0.65);font-weight:300;line-height:1.8;max-width:520px">What started as a simple love for baking has grown into a brand that brings warmth to families, offices, and celebrations across Ghana — one loaf at a time.</p>
     </div>
   </div>
-
-  <!-- THE STORY -->
-  <section style="padding:100px 5%;background:var(--bg-primary)">
-    <div class="about-story-grid">
-      <div>
-        <span class="sec-eyebrow">How It Started</span>
-        <h2 class="sec-title" style="font-size:clamp(32px,3.5vw,50px);margin-bottom:28px">Overripe bananas<br>and a <em>family recipe.</em></h2>
-        <div class="divider"></div>
-        <p style="font-size:14px;color:var(--muted);font-weight:300;line-height:1.9;margin-bottom:20px">It started simply — a handful of overripe bananas, a grandmother's handwritten recipe, and a Sunday afternoon with nothing but time. The result was so good that it couldn't stay in the kitchen.</p>
-        <p style="font-size:14px;color:var(--muted);font-weight:300;line-height:1.9;margin-bottom:20px">Word spread quickly among friends and family. Then came the first proper order — a birthday gift for someone's mother. Then a wedding favour. Then a corporate hamper. Within months, BakeMyDay.gh had become something real: Accra's favourite artisan banana bread brand.</p>
-        <p style="font-size:14px;color:var(--muted);font-weight:300;line-height:1.9">Every loaf still carries that same intention — to bring a moment of warmth to whoever receives it. Nothing has changed except the reach.</p>
-      </div>
-      <div class="about-story-img">
-        <img src="photo_2026-04-11_23-22-35.jpg" alt="BakeMyDay baking process">
-        <div class="about-story-img-caption">Freshly baked every morning, Tse-Addo, Accra</div>
-      </div>
-    </div>
-  </section>
 
   <!-- THREE PILLARS -->
   <div class="about-pillars">
@@ -660,9 +640,55 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
     <div class="pillar">
       <div class="pillar-icon">✨</div>
       <div class="pillar-title">No Compromises</div>
-      <p class="pillar-text">We refuse shortcuts. Real bananas, real butter, real care — every single day. No preservatives, no artificial flavours, no frozen batches. What leaves our kitchen is exactly what we would serve at our own table. That promise has never changed, and it never will.</p>
+      <p class="pillar-text">We refuse shortcuts. Real bananas, real care — every single day. No preservatives, no artificial flavours, no frozen batches. What leaves our kitchen is exactly what we would serve at our own table. That promise has never changed, and it never will.</p>
     </div>
   </div>
+
+  <!-- CUSTOMER TESTIMONIALS -->
+  <section class="testimonials-section">
+    <div style="text-align:center;margin-bottom:8px">
+      <span class="sec-eyebrow">What our customers say</span>
+      <h2 class="sec-title">The people have<br><em>spoken.</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+        <div class="testimonial-text">"I ordered the Smile Box for my mum's birthday and she absolutely loved it. The packaging was beautiful and the bread was so fresh — you could tell it was made that morning. This is now my go-to gift for every occasion."</div>
+        <div class="testimonial-author">Nana Ama K.</div>
+        <div class="testimonial-detail">Ordered for a birthday in East Legon</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+        <div class="testimonial-text">"We used BakeMyDay for our corporate end-of-year hampers — 40 boxes for the whole team. The quality was consistent across every single one. Our staff were genuinely excited. We've already booked them again for next quarter."</div>
+        <div class="testimonial-author">Kweku A.</div>
+        <div class="testimonial-detail">Corporate order, Cantonments</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+        <div class="testimonial-text">"The Oreo Crumble is unreal. I've tried banana bread from a lot of places in Accra and nothing comes close. My kids now request it every weekend. Same-day delivery too — no complaints at all."</div>
+        <div class="testimonial-author">Abena M.</div>
+        <div class="testimonial-detail">Regular customer, Spintex</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+        <div class="testimonial-text">"I sent a Mini Smile Box to my sister in Kumasi and it arrived perfectly. The vacuum-sealed packaging kept everything fresh. She called me the moment she opened it — said it made her whole week."</div>
+        <div class="testimonial-author">Kofi D.</div>
+        <div class="testimonial-detail">Nationwide delivery to Kumasi</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+        <div class="testimonial-text">"We had BakeMyDay provide the favours for our wedding — 80 personalised mini loaves with custom cards. Our guests couldn't stop talking about them. It was the perfect touch for our special day."</div>
+        <div class="testimonial-author">Efua & Yaw</div>
+        <div class="testimonial-detail">Wedding favours, Labone</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+        <div class="testimonial-text">"Honestly the best banana bread in Accra, full stop. The Double Chocolate is dangerously good. I love that they don't use preservatives — you can actually taste the difference. Pure quality."</div>
+        <div class="testimonial-author">Serwaa T.</div>
+        <div class="testimonial-detail">Regular customer, Dzorwulu</div>
+      </div>
+    </div>
+  </section>
 
   <!-- MILESTONES -->
   <div class="about-milestones">
@@ -688,9 +714,9 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
           <p class="milestone-text">Order before noon and receive your freshly baked bread by evening.</p>
         </div>
         <div class="milestone">
-          <div class="milestone-num">Worldwide</div>
-          <div class="milestone-label">International Shipping</div>
-          <p class="milestone-text">We ship to diaspora communities around the world — Ghana's taste, wherever you are.</p>
+          <div class="milestone-num">Nationwide</div>
+          <div class="milestone-label">Domestic Shipping</div>
+          <p class="milestone-text">We deliver across the country — Ghana's taste, right to your doorstep.</p>
         </div>
       </div>
     </div>
@@ -712,7 +738,6 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
     <div class="about-cta-text">Ready to send someone<br>a little <em>joy?</em></div>
     <div style="display:flex;gap:16px;flex-wrap:wrap">
       <button onclick="showPage('shop')" style="background:var(--ink);color:var(--gold);border:none;padding:16px 36px;font-family:var(--ff-sans);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;">Shop Now</button>
-    
     </div>
   </div>
 
@@ -759,8 +784,8 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
         <div class="faq-answer"><p>Yes! Orders placed before 12:00 PM are eligible for same-day delivery within Accra, subject to availability. Orders placed after noon are typically delivered the following day.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">Do you ship internationally?<span class="faq-icon">+</span></button>
-        <div class="faq-answer"><p>Yes, we do! We use vacuum-sealed packaging to ensure freshness during transit. Contact us on WhatsApp or email at bakemydaygh1@gmail.com to arrange international delivery.</p></div>
+        <button class="faq-question" onclick="toggleFaq(this)">Do you ship nationwide?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><p>Yes, we do! We use vacuum-sealed packaging to ensure freshness during transit. Contact us on WhatsApp or email at bakemydaygh1@gmail.com to arrange nationwide delivery.</p></div>
       </div>
     </div>
     <div class="faq-category">
@@ -786,7 +811,7 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
       </div>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">Do you use preservatives?<span class="faq-icon">+</span></button>
-        <div class="faq-answer"><p>Never. Real bananas, quality flour, real butter — no preservatives, no artificial flavours, no shortcuts. What you taste is exactly what we put in.</p></div>
+        <div class="faq-answer"><p>Never. Real bananas, quality flour — no preservatives, no artificial flavours, no shortcuts. What you taste is exactly what we put in.</p></div>
       </div>
     </div>
   </div>
@@ -833,10 +858,10 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
   <div class="footer-grid">
     <div>
       <div class="footer-brand-name" style="display:flex;align-items:center;gap:10px">
-        <img src="logo.jpg" style="width:28px;height:28px;border-radius:50%;object-fit:cover" alt="logo">
+        <img src="/static/logo.jpg" style="width:28px;height:28px;border-radius:50%;object-fit:cover" alt="logo">
         BakeMyDay<span style="color:var(--gold)">.gh</span>
       </div>
-      <div class="footer-tagline">Accra's finest banana bread. Handcrafted with love, delivered with joy. Available for individual orders, corporate gifting, and international shipping.</div>
+      <div class="footer-tagline">Accra's finest banana bread. Handcrafted with love, delivered with joy. Available for individual orders, corporate gifting, and nationwide shipping.</div>
       <div class="footer-social">
         <div class="social-btn" onclick="window.open('https://www.instagram.com/bakemyday.gh')">📸</div>
         <div class="social-btn" onclick="window.open('https://wa.me/233593963649')">💬</div>
@@ -854,7 +879,7 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
     <div class="footer-col">
       <div class="footer-col-title">Company</div>
       <ul>
-        <li onclick="showPage('about')">Our Story</li>
+        <li onclick="showPage('about')">About Us</li>
         <li onclick="showPage('custom')">Custom Orders</li>
         <li onclick="showPage('gallery')">Gallery</li>
         <li onclick="showPage('faq')">FAQ</li>
@@ -866,7 +891,7 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
         <li onclick="window.open('https://wa.me/233593963649')">WhatsApp</li>
         <li onclick="window.open('https://www.instagram.com/bakemyday.gh')">@bakemyday.gh</li>
         <li>Tse-Addo, Accra</li>
-        <li>Ghana · International Shipping</li>
+        <li>Nationwide Shipping</li>
       </ul>
     </div>
   </div>
@@ -886,34 +911,21 @@ footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding
 
 <script>
 // ─── DATA ────────────────────────────────────────────────────────────────────
-const PRODUCTS = [
-  {id:1,name:"Classic BB Loaf",category:"classic",price:75,tag:"Signature",img:"classic.png",desc:"Pure, unadulterated banana bread. The recipe that started it all — golden, moist, and irresistible.",cat_label:"Banana Bread"},
-  {id:2,name:"Coconut BB Loaf",category:"classic",price:85,tag:null,img:"coconut.png",desc:"Classic banana bread rolled in toasted desiccated coconut. Tropical, aromatic, and deeply satisfying.",cat_label:"Banana Bread"},
-  {id:3,name:"Carrot BB Loaf",category:"classic",price:85,tag:null,img:"raisin.jpg",desc:"A refined blend of banana and carrot with warm spice notes. Naturally moist with a beautifully tender crumb.",cat_label:"Banana Bread"},
-  {id:4,name:"Marble BB Loaf",category:"classic",price:85,tag:"Artisan",img:"Marble.jpg",desc:"Chocolate and banana swirled together into one stunning loaf. Every slice is a different, beautiful pattern.",cat_label:"Banana Bread"},
-  {id:5,name:"Chocolate BB Loaf",category:"classic",price:90,tag:"Artisan",img:"photo_2026-04-11_23-22-40.jpg",desc:"Rich cocoa woven through our classic banana bread batter. Deeply indulgent, intensely satisfying.",cat_label:"Banana Bread"},
-  {id:6,name:"Nuts BB Loaf",category:"classic",price:85,tag:"Artisan",img:"nuts.png",desc:"Crunchy mixed nuts folded into our banana bread for texture and a wholesome, nutty depth of flavour.",cat_label:"Banana Bread"},
-  {id:7,name:"Raisins BB Loaf",category:"classic",price:85,tag:null,img:"Rasins.png",desc:"Plump raisins baked throughout our classic banana bread — a traditional flavour with natural sweetness.",cat_label:"Banana Bread"},
-  {id:8,name:"Oreo BB Loaf",category:"deluxe",price:100,tag:"Fan Favourite",img:"Oreo.png",desc:"Crushed Oreo cookies folded into the batter and piled generously on top. Indulgent doesn't begin to cover it.",cat_label:"Banana Bread Deluxe"},
-  {id:9,name:"Choco Chips BB Loaf",category:"deluxe",price:100,tag:null,img:"choco chip.png",desc:"Premium semi-sweet chocolate chips distributed throughout every bite. Rich, warm, and deeply chocolatey.",cat_label:"Banana Bread Deluxe"},
-  {id:10,name:"Double Chocolate BB Loaf",category:"deluxe",price:100,tag:"Bold",img:"Double chocolate.png",desc:"Cocoa-enriched batter loaded with dark chocolate chunks. For those who believe there is no such thing as too much chocolate.",cat_label:"Banana Bread Deluxe"},
-  {id:11,name:"Whole Oats BB Loaf",category:"deluxe",price:110,tag:"Wholesome",img:"whole oats.jpg",desc:"Rolled oats woven through our banana bread for added texture, natural fibre, and a hearty, nourishing bite.",cat_label:"Banana Bread Deluxe"},
-  {id:12,name:"Bundt Banana Bread (Without frosting)",category:"deluxe",price:180,tag:null,img:"photo_2026-04-11_23-22-37.jpg",desc:"Our banana bread in a stunning bundt form. A show-stopping centrepiece, perfect for celebrations and gifting.",cat_label:"Bundt Cake"},
-  {id:13,name:"Bundt Banana Bread (With frosting)",category:"deluxe",price:250,tag:"Special",img:"photo_2026-04-11_23-22-37.jpg",desc:"Our classic bundt cake elevated with premium frosting and toppings. The ultimate banana bread experience.",cat_label:"Bundt Cake"},
-  {id:14,name:"Granola",category:"bundt",price:85,tag:"New",img:"Granola.jfif",desc:"Artisan granola crafted in-house with wholesome oats, toasted almonds, pumpkin seeds, coconut flakes, and dried fruit.",cat_label:"Granola & Extras"},
-  {id:15,name:"Greek Yogurt 500ml",category:"bundt",price:40,tag:null,img:"Granola.jfif",desc:"Premium Greek yogurt — a natural pairing with any of our banana breads. Thick, creamy, and fresh.",cat_label:"Extras"},
+let PRODUCTS = [];
 
-{id:101,name:"Mini Bliss Box", category:"package",price:45,tag:null,img:"Mini Bliss Box.jpg",desc:"Three freshly baked mini loaves, your choice of flavours — a perfect personal treat or thoughtful small gift.",includes:["3 Mini Loaves","Your choice of flavours"],cat_label:"Gift Package"},
-  {id:102,name:"The Bliss Box",category:"package",price:100,tag:"Value",img:"Bliss Box.jpg",desc:"Six mini loaves to share with family, colleagues, or friends. The most generous way to spread the BakeMyDay.gh experience.",includes:["6 Mini Loaves","Your choice of flavours"],cat_label:"Gift Package"},
-  {id:103,name:"The Joy Box",category:"package",price:120,tag:"Value",img:"Joy Box.jpg",desc:"Eight mini loaves to share with family, colleagues, or friends. The most generous way to spread the BakeMyDay.gh experience.",includes:["8 Mini Loaves","Your choice of flavours"],cat_label:"Gift Package"},
-  {id:104,name:"The Treat Yourself Box",category:"package",price:180,tag:"Value",img:"photo_2026-04-11_23-22-44.jpg",desc:"Six mini loaves paired with two savoury bites and a juice — the perfect indulgent personal treat.",includes:["6 Mini Loaves","2 Samosas","2 Spring Rolls","Juice"],cat_label:"Gift Package"},
-  {id:105,name:"Breakfast Platter",category:"package",price:180,tag:"Value",img:"photo_2026-04-11_23-22-44.jpg",desc:"A full breakfast spread with four mini loaves, waffles, sausages, eggs, pies, spring rolls, and samosas.",includes:["4 Mini Loaves","2 Banana Bread Waffles","Sausages","Eggs","2 Pies","2 Spring Rolls","2 Samosas"],cat_label:"Gift Package"},
-  {id:106,name:"The Delight Box",category:"package",price:80,tag:null,img:"Delight Box.jpg",desc:"Three mini loaves paired with a glass drink, a chocolate bar, and a personalised card. Perfect for any occasion.",includes:["3 Mini Loaves","200ml Glass Drink","1 Chocolate Bar","Personalised Card"],cat_label:"Gift Package"},
-  {id:107,name:"The Munch Box",category:"package",price:180,tag:null,img:"photo_2026-04-11_23-23-00.jpg",desc:"Four generous midi loaves — a substantial gift for those who take their banana bread seriously.",includes:["4 Midi Loaves","Your choice of flavours"],cat_label:"Gift Package"},
-  {id:108,name:"The Mini Smile Box",category:"package",price:160,tag:"Most Gifted",img:"mini smile.jpg",desc:"Four mini loaves, a 473ml glass drink, a chocolate drink, and a card. The iconic BakeMyDay gift set.",includes:["4 Mini Loaves","473ml Glass Drink","1 Chocolate Drink","Personalised Card"],cat_label:"Gift Package"},
-  {id:109,name:"The Smile Box",category:"package",price:280,tag:"Premium",img:"Smile Box.jpg",desc:"The full BakeMyDay.gh experience. Midi loaves, box juice, two premium chocolate bars — beautifully presented and ready to make someone's day.",includes:["4 Midi Loaves","Box Juice","2 Premium Chocolate Bars","Luxury Packaging","Personalized Card"],cat_label:"Gift Package"},
-  {id:110,name:"The Indulge Set",category:"package",price:250,tag:"Ultimate",img:"Indulge Set.PNG",desc:"Our most elaborate set. Six mini loaves alongside pies, savoury spring rolls, samosas, and a glass drink.",includes:["6 Mini Loaves","3 Pies","Spring Rolls & Samosa","1 Glass Drink"],cat_label:"Gift Package"},
-];
+async function loadProducts() {
+  try {
+    const resp = await fetch('/api/products');
+    if (!resp.ok) throw new Error('Failed to load products');
+    PRODUCTS = await resp.json();
+  } catch (err) {
+    console.error('Could not load products from backend:', err);
+  }
+  renderFeatured();
+  if (document.getElementById('page-shop').classList.contains('active')) {
+    renderShopGrid('all');
+  }
+}
 
 const PACKAGES = [
   
@@ -958,7 +970,7 @@ function renderCartItems() {
   const subtotal = cart.reduce((s,i) => s + i.price*i.qty, 0);
   list.innerHTML = cart.map(item => `
     <div class="cart-item">
-      <img class="cart-item-img" src="${item.img}" alt="${item.name}">
+      <img class="cart-item-img" src="/static/${item.img}" alt="${item.name}">
       <div>
         <div class="cart-item-name">${item.name}</div>
         <div class="cart-item-price">GH₵${item.price} each</div>
@@ -1005,7 +1017,7 @@ function productCardHTML(p, isPackage=false) {
   return `
     <div class="product-card">
       <div class="product-img">
-        <img src="${p.img}" alt="${p.name}">
+        <img src="/static/${p.img}" alt="${p.name}">
         ${p.tag ? '<div class="product-tag">'+p.tag+'</div>' : ''}
       </div>
       <div class="product-body">
@@ -1161,9 +1173,7 @@ function placeOrder() {
 }
 
 // ─── AUTO-SEND ORDER AFTER PAYMENT ───────────────────────────────────────────
-// Called automatically after successful Paystack payment — no user action needed
 async function autoSendOrderNotifications(order) {
-  // 1. EmailJS — send silently in background
   try {
     await emailjs.send("service_ayeshcl", "template_7b09kng", {
       to_email:    "bakemydaygh1@gmail.com",
@@ -1181,7 +1191,6 @@ async function autoSendOrderNotifications(order) {
     console.warn("EmailJS error:", err);
   }
 
-  // 2. WhatsApp — open automatically
   const waText = encodeURIComponent(
     "🧁 *New BakeMyDay Order*\n" +
     "─────────────────────\n" +
@@ -1231,6 +1240,21 @@ function submitCustom(e) {
     "─────────────────────"
   );
   const waURL = "https://wa.me/233593963649?text=" + waText;
+
+  fetch('/api/custom-orders', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      reference: order.ref,
+      name: order.name,
+      phone: order.phone,
+      occasion: document.getElementById("cf-occasion") ? document.getElementById("cf-occasion").value : '',
+      quantity: document.getElementById("cf-qty") ? document.getElementById("cf-qty").value : '',
+      date: document.getElementById("cf-date") ? document.getElementById("cf-date").value : '',
+      flavours: document.getElementById("cf-flavours") ? document.getElementById("cf-flavours").value : '',
+      notes: document.getElementById("cf-notes") ? document.getElementById("cf-notes").value : '',
+    })
+  }).catch(function(err) { console.warn('Custom order save error:', err); });
 
   emailjs.send("service_ayeshcl", "template_7b09kng", {
     to_email:    "bakemydaygh1@gmail.com",
@@ -1285,7 +1309,7 @@ function openPaystackIframe() {
       amount: amountInPesewas,
       currency: 'GHS',
       ref: orderId,
-      channels: ['mobile_money'], // Mobile money ONLY
+      channels: ['mobile_money'],
       metadata: {
         custom_fields: [
           { display_name:"Customer Name",    variable_name:"name",    value: checkoutData.name    || '' },
@@ -1297,7 +1321,24 @@ function openPaystackIframe() {
         ]
       },
       callback: function(response) {
-        // Build order object
+
+        fetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            reference: orderId,
+            name: checkoutData.name,
+            phone: checkoutData.phone,
+            email: checkoutData.email || '',
+            items: cart_snapshot.map(function(i) { return {name: i.name, qty: i.qty, price: i.price}; }),
+            total: subtotal,
+            method: checkoutData.method || 'delivery',
+            address: checkoutData.address || '',
+            date: checkoutData.date || '',
+            time: checkoutData.time || '',
+          })
+        }).catch(function(err) { console.warn('Order save error:', err); });
+
         const order = {
           name:    checkoutData.name,
           phone:   checkoutData.phone,
@@ -1310,16 +1351,13 @@ function openPaystackIframe() {
           notes:   checkoutData.time ? "Time slot: " + checkoutData.time : "",
         };
 
-        // Clear cart
         cart = [];
         updateCartUI();
         renderCartItems();
         closeCheckout();
 
-        // AUTO-SEND notifications immediately — no button needed
         autoSendOrderNotifications(order);
 
-        // Show success screen (no send button needed)
         setTimeout(function() {
           document.getElementById('checkout-modal').classList.add('open');
           document.getElementById('checkout-content').innerHTML =
@@ -1361,7 +1399,6 @@ function toggleTheme() {
 })();
 
 function toggleMobileMenu() {
-  // Basic mobile menu toggle placeholder
   const links = document.querySelector('.nav-links');
   if (links) {
     links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
@@ -1369,7 +1406,7 @@ function toggleMobileMenu() {
 }
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
-renderFeatured();
+loadProducts();
 renderCartItems();
 </script>
 <script src="https://js.paystack.co/v1/inline.js"></script>
